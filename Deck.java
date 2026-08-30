@@ -8,16 +8,20 @@ public class Deck
 {
     private Card[] cards;
 
+    public Deck(int n)
+    {
+        this.cards = new Card[n];
+    }
     public Deck()
     {
-        this.cards = New Card[52];
+        this.cards = new Card[52];
 
         int index = 0;
         for (int suit = 0; suit < 4; suit++)
         {
             for (int rank = 1; rank <= 13; rank++)
             {
-                cards[index] = New Card(rank, suit);
+                cards[index] = new Card(rank, suit);
                 index++;
             }
         }
@@ -108,6 +112,81 @@ public class Deck
             int pivotPosition = partition(low, high);
             quickSort(low, pivotPosition - 1);
             quickSort(pivotPosition + 1, high);
+        }
+    }
+
+    public Deck subdeck(int low, int high)
+    {
+        Deck sub = new Deck(high - low + 1);
+        for (int i = 0; i < sub.cards.length; i++)
+        {
+            sub.cards[i] = this.cards[low + i];
+        }
+        return sub;
+    }
+
+    public static Deck merge(Deck d1, Deck d2)
+    {
+        Deck result = new Deck(d1.cards.length + d2.cards.length);
+
+        int i = 0; // pointer into d1.cards
+        int j = 0; // pointer into d2 cards
+        int k = 0; // pointer into result.cards
+
+        while (i < d1.cards.length && j < d2.cards.length)
+        {
+            if (d1.cards[i].compareTo(d2.cards[j]) <= 0)
+            {
+                result.cards[k] = d1.cards[i];
+                i++;
+            }
+            else
+            {
+                result.cards[k] =  d2.cards[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Insert the remaining cards of d1
+        while (i < d1.cards.length)
+        {
+            result.cards[k] = d1.cards[i];
+            i++;
+            k++;
+        }
+
+        // Insert the remaining cards of d2
+        while (j < d2.cards.length)
+        {
+            result.cards[k] = d2.cards[j];
+            j++;
+            k++;
+        }
+
+        return result;
+    }
+
+    public void mergeSort()
+    {
+        if (cards.length <= 1)
+        {
+            return;
+        }
+
+        int mid = cards.length / 2;
+
+        Deck left = subdeck(0, mid - 1);
+        Deck right = subdeck(mid, cards.length - 1);
+
+        left.mergeSort();
+        right.mergeSort();
+
+        Deck merged = merge(left, right);
+
+        for (int i = 0; i < cards.length; i++)
+        {
+            this.cards[i] = merged.cards[i];
         }
     }
 }
