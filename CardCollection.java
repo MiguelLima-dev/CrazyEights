@@ -77,13 +77,22 @@ public class CardCollection
     }
 
     /**
+     * Deal all cards
+     */
+    public void dealAll(CardCollection that)
+    {
+        int i = size();
+        deal(that, i);
+    }
+    
+    /**
      * Returns the label
      */
     public String getLabel()
     {
         return label;
     }
-    
+
     /**
      * Gets the card in the index i
      */
