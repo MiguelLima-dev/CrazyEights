@@ -17,9 +17,25 @@ public class Player
     }
 
     /**
+     * Gets the player's name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Gets the player's hand
+     */
+    public Hand getHand()
+    {
+        return hand;
+    }
+
+    /**
      * Which card will be discarded
      */
-    public Card play(Eights, Card prev)
+    public Card play(Eights eights, Card prev)
     {
         Card card = searchForMatch(prev);
         if (card == null)
@@ -37,7 +53,7 @@ public class Player
         for (int i = 0; i < hand.size(); i++)
         {
             Card card = hand.getCard(i);
-            if (CardMatches(card, prev))
+            if (cardMatches(card, prev))
             {
                 return hand.popCard(i);
             }
@@ -96,7 +112,7 @@ public class Player
         for (int i = 0; i < hand.size(); i++)
         {
             Card card = hand.getCard(i);
-            int card = hand.getRank();
+            int rank = card.getRank();
             if (rank == 8)
             {
                 sum -= 20;
@@ -111,5 +127,21 @@ public class Player
             }
         }
         return sum;
+    }
+
+    /**
+     * Displays the player's hand
+     */
+    public void display()
+    {
+        hand.display();
+    }
+
+    /**
+     * Displays the player's name and score
+     */    
+    public void displayScore()
+    {
+        System.out.println(name + " has " + score() + " points");
     }
 }

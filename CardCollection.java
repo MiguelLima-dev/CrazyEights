@@ -58,7 +58,7 @@ public class CardCollection
     /**
      * Returns if the collection is empty
      */
-    public boolean isEmpty()
+    public boolean empty()
     {
         return size() == 0;
     }
