@@ -39,7 +39,7 @@ src/
 git clone https://github.com/MiguelLima-dev/Cards.git
 cd Cards/src
 javac *.java
-java Test
+java Test player1 player2
 ```
 
 This compiles all classes and starts a game via `Test.java`.
