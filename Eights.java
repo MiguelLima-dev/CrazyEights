@@ -15,16 +15,16 @@ public class Eights
     private Hand discardPile;
     private Scanner in;
 
-    public Eights()
+    public Eights(String player1, String player2)
     {
         Deck deck = new Deck("Deck");
         deck.shuffle();
 
         int handSize = 5;
-        one = new Player("Allen");
+        one = new Player(player1);
         deck.deal(one.getHand(), handSize);
         
-        two = new Player("Chris");
+        two = new Player(player2);
         deck.deal(two.getHand(), handSize);
 
         discardPile = new Hand("Discards");
