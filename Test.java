@@ -9,20 +9,14 @@ public class Test
 {
     public static void main(String[] args)
     {
-        Eights game = new Eights();
-        game.playGame();
-        
-        /** 
-        Deck deck = new Deck("Deck");
-        deck.shuffle();
-
-        Hand hand = new Hand("Hand");
-        deck.deal(hand, 5);
-        hand.display();
-
-        Hand drawPile = new Hand("Draw Pile");
-        deck.dealAll(drawPile);
-        System.out.printf("Draw pile has %d cards.\n", drawPile.size());
-        */
+        if (args.length == 2)
+        {
+            Eights game = new Eights(args[0], args[1]);
+            game.playGame();
+        }
+        else
+        {
+            System.out.println("Use: java Test \"p1Name\" \"p2Name\"");
+        }
     }
 }
